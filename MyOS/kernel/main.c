@@ -1,8 +1,6 @@
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 main.c
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Forrest Yu, 2005
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 #include "type.h"
@@ -273,23 +271,6 @@ PUBLIC void clear()
 		printf("\n");
 }
 
-/*PUBLIC void clear() {
-int i = 0;
-disp_pos = 0;
-for(i=0;i<3000;i++){
-disp_str(" ");
-}
-disp_pos = 0;
-//printf("%d",console_table[current_console].cursor);
-printf("%d",console_table[current_console].crtc_start);
-console_table[current_console].crtc_start = 0;
-console_table[current_console].cursor = 0;
-printf(" %d",current_console);
-
-clear_screen(0,console_table[current_console].cursor);
-console_table[current_console].crtc_start = 0;
-console_table[current_console].cursor = 0;
-}*/
 
 void linlei_shell(const char* tty_name){
 	int fd_stdin  = open(tty_name, O_RDWR);
@@ -329,7 +310,7 @@ void linlei_shell(const char* tty_name){
 			int i;
 			for(i=0;i<usercount;i++){
 				if(strcmp(buf, users[i]) == 0 && strcmp(buf, "empty") != 0){
-					printf("Enter %s Password:");
+					printf("Enter Password:");
 					char buf[128];
 					int r = read(0, buf, 128);
 					buf[r] = 0;					
@@ -764,25 +745,24 @@ void deleteLog(char * filepath)
 
 void showhelp(){
 	printf(" _________________________________________________________________ \n");
-	printf("|          instruction           |             function           |\n");
-	printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 	printf("| help                           | show help table                |\n");
 	printf("| sudo                           | obtain administrator privileges|\n");
 	printf("| add      [username] [password] | add user                       |\n");
-	printf("| remove     [username] [password] | remove user                    |\n");
-	printf("| shiftlog [username] [password] | shift to user                  |\n");
+	printf("| remove   [username] [password] | remove user                    |\n");
+	printf("| shift    [username] [password] | shift to another user          |\n");
 	printf("| ls                             | show file list                 |\n");
 	printf("| read     [filename]            | read file                      |\n");
 	printf("| create   [filename] [content]  | create file                    |\n");
-	printf("| edit+    [filename] [content]  | edit file, append content      |\n");
+	printf("| append   [filename] [content]  | edit file, append content      |\n");
 	printf("| edit     [filename] [content]  | edit file, cover content       |\n");
 	printf("| delete   [filename]            | delete file                    |\n");
 	printf("| proc                           | show running process table     |\n");
 	printf("| kill     [proc.no]             | kill process                   |\n");
 	printf("| pause    [proc.no]             | pause process                  |\n");
 	printf("| resume   [proc.no]             | resume process                 |\n");
-	printf("\n");
-	printf(" Applications: fuckLandlord, chess\n");
+	printf("| chess                          | play chess game                |\n");
+	printf("| calculator                     | use a simple calculator        |\n");
+	printf(" _________________________________________________________________ \n");
 
 }
 
@@ -1288,9 +1268,9 @@ void ls()
 /* Show Process */
 void showProcess()
 {	int i = 0;
-	printf(" ----------------------------------------------------\n");
-    printf("|    name     |  priority  |  run_state(0 is runable) |\n");
-    printf(" ----------------------------------------------------\n");
+	printf(" -------------------------------------------\n");
+    printf("|    name     |  priority  |  state         |\n");
+    printf(" -------------------------------------------\n");
 	for (i = 0; i < NR_TASKS + NR_NATIVE_PROCS; i++)
 	{
 		if(proc_table[i].p_flags != 1){
@@ -1364,7 +1344,7 @@ void Init()
 
 
 /*======================================================================*
-                               TestA
+                               Test
  *======================================================================*/
 void TestA()
 {
@@ -1374,9 +1354,6 @@ void TestA()
 	} 
 }
 
-/*======================================================================*
-                               TestB
- *======================================================================*/
 void TestB()
 {
 	while(1){
@@ -1385,9 +1362,6 @@ void TestB()
 	} 
 }
 
-/*======================================================================*
-                               TestB
- *======================================================================*/
 void TestC()
 {
 	while(1){
