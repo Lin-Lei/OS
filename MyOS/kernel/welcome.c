@@ -11,7 +11,7 @@
 #include "proto.h"
 
 void welcomeMiao(){
-	int t=5000;
+	int t=2500;
 	
 	
 	printf("  _        _____   _   _   _        ______   _____ \n");

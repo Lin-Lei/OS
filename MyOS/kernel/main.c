@@ -337,7 +337,7 @@ void linlei_shell(const char* tty_name){
 		clearArr(arg2, 128);
 		clearArr(buf, 1024);
 		if(UserState == 3)
-			printf("[Admin@MyOS]%s# ",location);
+			printf("[Admin@MyOS]%s$ ",location);
 		else
 			printf("[%s@MyOS]/%s$ ",users[UserState-1],location);
 		//write(1, "$ ", 2);
@@ -428,7 +428,7 @@ void linlei_shell(const char* tty_name){
 				else if(strcmp(cmd, "remove") == 0){
 					removeUser(arg1,arg2);
 				}
-				else if(strcmp(cmd, "shiftlog") == 0){
+				else if(strcmp(cmd, "shift") == 0){
 					shift(arg1,arg2);
 				}
 				else if(strcmp(cmd, "create") == 0){
@@ -761,7 +761,6 @@ void showhelp(){
 	printf("| pause    [proc.no]             | pause process                  |\n");
 	printf("| resume   [proc.no]             | resume process                 |\n");
 	printf("| chess                          | play chess game                |\n");
-	printf("| calculator                     | use a simple calculator        |\n");
 	printf(" _________________________________________________________________ \n");
 
 }
@@ -1048,7 +1047,7 @@ void deleteFile(char * filepath)
 	int a = unlink(filepath);
 	if(a != 0)
 	{
-		printf("Edit fail, please try again!\n");
+		//printf("Edit fail, please try again!\n");
 		return;
 	}
 	deleteLog(filepath);
@@ -1218,7 +1217,7 @@ void removeUser(char * username, char * password)
 						count = 0;
 					}
 				}		
-				printf("Delete %s!\n", users[i]);
+				printf("Remove %s!\n", users[i]);
 				strcpy(users[i], "empty");
 				strcpy(passwords[i], "");
 				updateMyUsers();
@@ -1268,9 +1267,9 @@ void ls()
 /* Show Process */
 void showProcess()
 {	int i = 0;
-	printf(" -------------------------------------------\n");
-    printf("|    name     |  priority  |  state         |\n");
-    printf(" -------------------------------------------\n");
+	printf(" -------------------------------------------------\n");
+    printf("|    name     |  priority  |  state               |\n");
+    printf(" -------------------------------------------------\n");
 	for (i = 0; i < NR_TASKS + NR_NATIVE_PROCS; i++)
 	{
 		if(proc_table[i].p_flags != 1){
